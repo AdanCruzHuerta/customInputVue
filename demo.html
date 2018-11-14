@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom input model vue.js</title>
+</head>
+<body>	
+	<div id="app">
+		<input-component v-model="name"></input-component>
+		<input-component v-model="last"></input-component>
+	</div>
+	<template id="input-component">
+		<input type="text" @input="updateInput($event.target.value)">
+	</template>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		Vue.component('input-component', {
+			props: ['value'],
+			template: '#input-component',
+			methods: {
+				updateInput: function(value) {
+					this.$emit('input', value);
+				}
+			}
+		});
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				name: '',
+				last: ''
+			}
+		});
+	</script>
+</body>
+</html>
